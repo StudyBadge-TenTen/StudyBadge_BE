@@ -265,6 +265,10 @@ public class ScheduleService {
             throw new IllegalArgumentForRepeatScheduleEditRequestException();
         }
 
+        if(!repeatSchedule.getRepeatEndDate().isEqual(editRequestToRepeatSchedule.getRepeatEndDate())) {
+            editRequestToRepeatSchedule.setRepeatEndDate(repeatSchedule.getRepeatEndDate());
+        }
+
         LocalDate selectedDate = editRequestToRepeatSchedule.getSelectedDate();
         RepeatCycle repeatCycle = editRequestToRepeatSchedule.getRepeatCycle();
         RepeatSituation repeatSituation = editRequestToRepeatSchedule.getRepeatSituation();

@@ -48,6 +48,7 @@ public class RepeatScheduleEditRequest implements ScheduleEditRequest{
     @NotNull(message = "일정 반복 상황은 필수입니다.")
     @JsonDeserialize(using = RepeatSituationNumberDeserializer.class)
     private RepeatSituation repeatSituation;
+    @Setter
     @NotNull(message = "일정 반복 끝나는 날짜는 필수입니다.")
     private LocalDate repeatEndDate;
 
