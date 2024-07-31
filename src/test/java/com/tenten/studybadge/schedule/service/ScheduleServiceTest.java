@@ -176,7 +176,7 @@ class ScheduleServiceTest {
             .scheduleEndTime(LocalTime.of(21, 0))
             .repeatCycle(RepeatCycle.WEEKLY)
             .repeatSituation(RepeatSituation.SUNDAY)
-            .repeatEndDate(LocalDate.of(2024, 11, 15))
+            .repeatEndDate(LocalDate.of(2024, 12, 29))
             .build();
 
         studyLeader = StudyMember.builder()
@@ -748,7 +748,7 @@ class ScheduleServiceTest {
             assertEquals(LocalTime.of(21, 0), savedSchedule.getScheduleEndTime());
             assertEquals(RepeatCycle.WEEKLY, savedSchedule.getRepeatCycle());
             assertEquals(RepeatSituation.SUNDAY, savedSchedule.getRepeatSituation());
-            assertEquals(LocalDate.of(2024, 11, 15), savedSchedule.getRepeatEndDate());
+            assertEquals(LocalDate.of(2024, 12, 29), savedSchedule.getRepeatEndDate());
             assertNull( savedSchedule.getPlaceId());
           }
       }
