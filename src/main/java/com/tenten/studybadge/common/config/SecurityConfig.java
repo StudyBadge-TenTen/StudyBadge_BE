@@ -57,7 +57,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/api/members/logout", "api/study-channels/*/places", "/api/study-channels/**", "/api/token/re-issue"
                                 , "/api/members/my-info", "/api/members/my-info/update", "/api/payments/**", "/api/participation/**",
                             "/api/study-channels/*/single-schedules/**", "/api/study-channels/*/repeat-schedules/**",
-                            "/api/study-channels/*/schedules/**", "/api/points/my-point/**", "/api/members/my-apply/**", "/api/notifications/**", "/api/members/my-study", "/api/members/withdrawal").hasRole("USER"))
+                            "/api/study-channels/*/schedules/**", "/api/points/my-point/**", "/api/members/my-apply/**", "/api/notifications/**", "/api/members/my-study", "/api/members/withdrawal", "/api/cert/account/**").hasRole("USER"))
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
 
                 .cors(cors -> new CorsConfig())

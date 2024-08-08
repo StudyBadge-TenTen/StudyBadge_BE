@@ -25,6 +25,8 @@ public class MemberResponse {
 
     private String accountBank;
 
+    private Boolean isAccountCert;
+
     private String introduction;
 
     private String imgUrl;
@@ -43,6 +45,7 @@ public class MemberResponse {
                 .nickname(member.getNickname())
                 .account(member.getAccount())
                 .accountBank(member.getAccountBank())
+                .isAccountCert(member.getIsAccountCert())
                 .badgeLevel(member.getBadgeLevel())
                 .introduction(member.getIntroduction())
                 .imgUrl(member.getImgUrl())
