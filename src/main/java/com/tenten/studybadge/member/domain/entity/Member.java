@@ -34,6 +34,8 @@ public class Member extends BaseEntity {
 
     private String accountBank;
 
+    private Boolean isAccountCert;
+
     private String imgUrl;
 
     private Boolean isAuth;

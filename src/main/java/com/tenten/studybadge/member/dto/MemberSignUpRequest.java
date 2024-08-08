@@ -63,6 +63,7 @@ public class MemberSignUpRequest {
                 .banCnt(0)
                 .account(signUpRequest.getAccount())
                 .accountBank(signUpRequest.getAccountBank())
+                .isAccountCert(false)
                 .status(MemberStatus.WAIT_FOR_APPROVAL)
                 .badgeLevel(BadgeLevel.NONE)
                 .build();
