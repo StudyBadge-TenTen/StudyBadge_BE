@@ -4,9 +4,9 @@ import com.tenten.studybadge.attendance.service.AttendanceService;
 import com.tenten.studybadge.common.component.AwsS3Service;
 import com.tenten.studybadge.common.email.MailService;
 import com.tenten.studybadge.common.exception.InvalidTokenException;
+import com.tenten.studybadge.common.exception.account.BeforeCertAccountException;
 import com.tenten.studybadge.common.exception.member.*;
 import com.tenten.studybadge.common.exception.participation.NotFoundParticipationException;
-import com.tenten.studybadge.common.exception.studychannel.NotFoundStudyChannelException;
 import com.tenten.studybadge.common.jwt.JwtTokenProvider;
 import com.tenten.studybadge.common.redis.RedisService;
 import com.tenten.studybadge.member.dto.*;
@@ -61,7 +61,9 @@ public class MemberService {
             throw new NotMatchPasswordException();
         }
 
-
+        if (!signUpRequest.getIsAccountCert()) {
+            throw new BeforeCertAccountException();
+        }
 
         Optional<Member> byEmail = memberRepository.findByEmailAndPlatform(signUpRequest.getEmail(), platform);
         if (byEmail.isPresent()) {

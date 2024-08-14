@@ -52,12 +52,12 @@ public class SecurityConfig implements WebMvcConfigurer {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( requests -> requests
                         .requestMatchers("/api/members/sign-up", "/api/members/auth/**", "/h2-console/**", "/swagger-ui/**", "/v3/api-docs/**", "/api/members/login/**", "/error", "/health-check").permitAll()
-                        .requestMatchers("/api/token/oauth2/**", "/favicon.ico", "/oauth2/**", "/api/payments/success/**", "/api/payments/cancel/**", "/api/members/password/**", "/api/members/resend/**").permitAll()
+                        .requestMatchers("/api/token/oauth2/**", "/favicon.ico", "/oauth2/**", "/api/payments/success/**", "/api/payments/cancel/**", "/api/members/password/**", "/api/members/resend/**", "/api/cert/sign-up/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/study-channels", "/api/study-channels/{studyChannelId:\\d+}").permitAll()
                         .requestMatchers("/api/members/logout", "api/study-channels/*/places", "/api/study-channels/**", "/api/token/re-issue"
                                 , "/api/members/my-info", "/api/members/my-info/update", "/api/payments/**", "/api/participation/**",
                             "/api/study-channels/*/single-schedules/**", "/api/study-channels/*/repeat-schedules/**",
-                            "/api/study-channels/*/schedules/**", "/api/points/my-point/**", "/api/members/my-apply/**", "/api/notifications/**", "/api/members/my-study", "/api/members/withdrawal").hasRole("USER"))
+                            "/api/study-channels/*/schedules/**", "/api/points/my-point/**", "/api/members/my-apply/**", "/api/notifications/**", "/api/members/my-study", "/api/members/withdrawal", "/api/cert/account/**").hasRole("USER"))
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
 
                 .cors(cors -> new CorsConfig())
