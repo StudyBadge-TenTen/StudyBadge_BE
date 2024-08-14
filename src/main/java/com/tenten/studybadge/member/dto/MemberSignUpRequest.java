@@ -44,6 +44,8 @@ public class MemberSignUpRequest {
     @NotBlank(message = "확인 비밀번호를 입력해주세요.")
     private String checkPassword;
 
+    private Boolean isAccountCert;
+
 
     public static Member toEntity(Member member, MemberSignUpRequest signUpRequest) {
 
@@ -63,16 +65,9 @@ public class MemberSignUpRequest {
                 .banCnt(0)
                 .account(signUpRequest.getAccount())
                 .accountBank(signUpRequest.getAccountBank())
-                .isAccountCert(false)
+                .isAccountCert(signUpRequest.getIsAccountCert())
                 .status(MemberStatus.WAIT_FOR_APPROVAL)
                 .badgeLevel(BadgeLevel.NONE)
                 .build();
-
-
-
     }
-
-
-
-
 }
