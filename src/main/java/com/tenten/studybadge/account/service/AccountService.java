@@ -2,6 +2,7 @@ package com.tenten.studybadge.account.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.siot.IamportRestClient.IamportClient;
+import com.tenten.studybadge.account.dto.AccountRequest;
 import com.tenten.studybadge.account.dto.AccountResponse;
 import com.tenten.studybadge.common.exception.account.NotMatchAccountHolder;
 import com.tenten.studybadge.common.exception.member.NotFoundMemberException;
@@ -31,6 +32,7 @@ public class AccountService {
     private IamportClient iamportClient;
 
     private final MemberRepository memberRepository;
+    private final ObjectMapper objectMapper;
 
     public AccountResponse getAccountHolder(String bankCode, String bankNum) {
 
@@ -57,12 +59,14 @@ public class AccountService {
         return AccountResponse.getHolder(decode);
     }
 
-    public void certAccount(Long memberId, String bankCode, String bankNum) {
+    public void certAccount(Long memberId, AccountRequest accountRequest) {
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(NotFoundMemberException::new);
 
-        AccountResponse accountResponse = getAccountHolder(bankCode, bankNum);
+        AccountResponse accountResponse = getAccountHolder
+                (accountRequest.getBankCode(),
+                accountRequest.getBankNum());
 
         if (accountResponse.getAccountHolder().equals(member.getName())) {
 
@@ -78,16 +82,23 @@ public class AccountService {
         }
     }
 
+    public void certSignUp(String bankCode, String bankNum, String name) {
+
+        AccountResponse accountResponse = getAccountHolder(bankCode, bankNum);
+
+        if ( !accountResponse.getAccountHolder().equals(name)) {
+
+            throw new NotMatchAccountHolder();
+        }
+    }
+
     private String decodeUnicode(String response) {
         try {
-
-            ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> responseMap = objectMapper.readValue(response, Map.class);
 
             Map<String, Object> responseDetails = (Map<String, Object>) responseMap.get(RESPONSE);
-            String bankHolder = (String) responseDetails.get(BANK_HOLDER);
 
-            return bankHolder;
+            return (String) responseDetails.get(BANK_HOLDER);
 
         } catch (Exception e) {
             e.printStackTrace();
